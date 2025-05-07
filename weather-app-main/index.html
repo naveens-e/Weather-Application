@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- ====================== META SECTION ====================== -->
+    <!-- Character encoding and viewport settings for responsive design -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Page Title -->
+    <title>Weather App</title>
+
+    <!-- ====================== STYLESHEET LINKS ====================== -->
+    <!-- Main CSS file for custom styles -->
+    <link rel="stylesheet" href="style.css" />
+    
+    <!-- FontAwesome for high-quality icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  </head>
+
+  <body>
+    <!-- ====================== MAIN APP CONTAINER ====================== -->
+    <div id="weather-container">
+      <!-- App Title -->
+      <h2>Weather App</h2>
+
+      <!-- ====================== SEARCH SECTION ====================== -->
+      <!-- City input field -->
+      <input 
+        type="text" 
+        id="city" 
+        placeholder="Enter city" 
+        aria-label="Enter city name for weather search"
+      />
+      
+      <!-- Search trigger button -->
+      <button onclick="getWeather()">Search</button>
+
+      <!-- ====================== WEATHER DISPLAY SECTION ====================== -->
+      <!-- Dynamic weather icon display -->
+      <img id="weather-icon" alt="Weather Icon" />
+      
+      <!-- Temperature display area -->
+      <div id="temp-div"></div>
+      
+      <!-- General weather condition display -->
+      <div id="weather-info"></div>
+
+      <!-- ====================== DETAILED WEATHER METRICS ====================== -->
+      <div id="extra-info">
+        <!-- Humidity display with icon -->
+        <p>
+          <i class="fas fa-tint" aria-hidden="true"></i> Humidity:
+          <span id="humidity-value"></span>%
+        </p>
+        
+        <!-- Wind speed display with icon -->
+        <p>
+          <i class="fas fa-wind" aria-hidden="true"></i> Wind: 
+          <span id="wind-value"></span> m/s
+        </p>
+        
+        <!-- Atmospheric pressure display with icon -->
+        <p>
+          <i class="fas fa-tachometer-alt" aria-hidden="true"></i> Pressure:
+          <span id="pressure-value"></span> hPa
+        </p>
+      </div>
+
+      <!-- ====================== FORECAST SECTION ====================== -->
+      <div id="hourly-forecast-container">
+        <h3>Hourly Forecast</h3>
+        <!-- Container for dynamically generated hourly forecast items -->
+        <div id="hourly-forecast"></div>
+      </div>
+
+      <!-- ====================== STATUS INDICATORS ====================== -->
+      <!-- Loading spinner/indicator (shown during API requests) -->
+      <div id="loading-indicator" aria-live="polite"></div>
+      
+      <!-- Error message display area -->
+      <div id="error-message" role="alert"></div>
+    </div>
+
+    <!-- ====================== SCRIPTS ====================== -->
+    <!-- Main JavaScript file containing app logic -->
+    <script src="script.js"></script>
+  </body>
+</html>

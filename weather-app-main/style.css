@@ -1,0 +1,348 @@
+/* ============================================== 
+   WEATHER APPLICATION STYLESHEET
+   Author: [Your Name]
+   Version: 1.0
+   Last Updated: [Date]
+   ============================================== */
+
+/* ==================== GLOBAL STYLES ==================== */
+/* 
+ * Root variables for consistent theming throughout the application
+ * These CSS custom properties allow for easy theme adjustments
+ */
+:root {
+  /* Gradient background for the entire page */
+  --primary-color: linear-gradient(to right, #005AA7, #FFFDE4);
+  
+  /* Text colors with strong contrast ratios for accessibility */
+  --text-light: #fff;                    /* WCAG AAA compliant on dark backgrounds */
+  --text-dark: #333;                     /* WCAG AAA compliant on light backgrounds */
+  
+  /* Semi-transparent backgrounds for modern "glass" effect */
+  --bg-light: rgba(255, 255, 255, 0.3);  /* Light frosted glass */
+  --bg-dark: rgba(50, 50, 50, 0.5);      /* Dark frosted glass */
+  
+  /* Error states with appropriate transparency */
+  --error-light: rgba(255, 0, 0, 0.2);   /* Subtle error indication */
+  --error-dark: rgba(255, 0, 0, 0.3);    /* More prominent error state */
+}
+
+/* 
+ * Universal reset for consistent cross-browser styling 
+ * Using border-box model for predictable sizing calculations
+ */
+* {
+  box-sizing: border-box;  /* Includes padding and border in element dimensions */
+  margin: 0;              /* Reset default browser margins */
+  padding: 0;             /* Reset default browser padding */
+  transition: background-color 0.3s ease, color 0.2s ease; /* Smooth theme transitions */
+}
+
+/* 
+ * Base body styling with responsive layout
+ * Ensures proper centering and background across all devices
+ */
+body {
+  background: var(--primary-color);              /* Gradient background */
+  font-family: 'Segoe UI', system-ui, sans-serif; /* Modern font stack */
+  display: flex;                                 /* Flex layout for centering */
+  align-items: center;                           /* Vertical centering */
+  justify-content: center;                       /* Horizontal centering */
+  min-height: 100vh;                            /* Full viewport height */
+  padding: 20px;                                /* Safe area padding */
+}
+
+/* ==================== MAIN CONTAINER ==================== */
+/* 
+ * Primary weather container with modern glass morphism effect
+ * Includes responsive sizing and subtle depth effects
+ */
+#weather-container {
+  background: var(--bg-light);                 /* Semi-transparent background */
+  width: 100%;                                /* Responsive width */
+  max-width: 400px;                           /* Maximum width for readability */
+  padding: 25px;                              /* Internal spacing */
+  border-radius: 15px;                        /* Soft rounded corners */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);  /* Subtle depth shadow */
+  backdrop-filter: blur(10px);                 /* Frosted glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Enhances glass effect */
+  text-align: center;                          /* Center-aligned content */
+}
+
+/* ==================== TYPOGRAPHY ==================== */
+/* 
+ * Text hierarchy and styling for optimal readability
+ * Ensures proper contrast and visual hierarchy
+ */
+h2, label, p, #date-time {
+  color: var(--text-light);  /* High contrast text */
+  margin: 8px 0;            /* Consistent vertical rhythm */
+}
+
+/* ==================== FORM ELEMENTS ==================== */
+/* 
+ * Input field styling with focus states for accessibility
+ * Includes proper spacing and interactive feedback
+ */
+input {
+  width: calc(100% - 16px);                  /* Responsive width accounting for padding */
+  padding: 10px 12px;                        /* Comfortable touch target */
+  border-radius: 10px;                       /* Rounded corners */
+  border: 1px solid rgba(255, 255, 255, 0.8); /* Subtle border */
+  margin-top: 20px;                          /* Spacing from preceding elements */
+  background: rgba(255, 255, 255, 0.7);      /* Semi-transparent background */
+  color: var(--text-dark);                   /* Dark text for contrast */
+  font-size: 16px;                           /* Readable base size */
+}
+
+/* Placeholder text styling */
+input::placeholder {
+  color: rgba(51, 51, 51, 0.7);  /* Semi-transparent placeholder */
+}
+
+/* Focus state for keyboard navigation */
+input:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.5); /* Visible focus indicator */
+  background: rgba(255, 255, 255, 0.9);       /* Enhanced contrast when focused */
+}
+
+/* 
+ * Primary action button with interactive states
+ * Includes gradient background and hover effects
+ */
+button {
+  background: linear-gradient(90deg, #1CB5E0 0%, #000851 100%); /* Attractive gradient */
+  color: var(--text-light);     /* High contrast text */
+  padding: 12px;               /* Comfortable touch target */
+  border: none;                /* Remove default border */
+  border-radius: 10px;         /* Rounded corners */
+  cursor: pointer;             /* Indicates interactivity */
+  margin-top: 20px;            /* Spacing from input */
+  width: 100%;                /* Full width */
+  font-size: 16px;            /* Readable text size */
+  font-weight: 600;           /* Semi-bold for emphasis */
+  transition: all 0.3s ease;  /* Smooth hover transition */
+}
+
+/* Interactive button states */
+button:hover {
+  background: linear-gradient(to right, #de6161, #2657eb); /* Alternate gradient */
+  transform: translateY(-2px);  /* Subtle lift effect */
+}
+
+button:active {
+  transform: translateY(0);     /* Reset position when clicked */
+}
+
+button:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.8); /* Visible focus ring */
+}
+
+/* ==================== WEATHER DISPLAY ==================== */
+/* 
+ * Temperature display with responsive typography
+ * Uses modern CSS techniques for visual impact
+ */
+#temp-div {
+  min-height: 120px;          /* Prevents layout shift */
+  display: flex;              /* Flex layout for centering */
+  justify-content: center;    /* Horizontal centering */
+  align-items: center;       /* Vertical centering */
+}
+
+#temp-div p {
+  font-size: clamp(110px, 18vw, 150px)!important; /* Fluid typography */
+  font-weight: 800;           /* Extra bold for emphasis */
+  margin: 0;                  /* Remove default margins */
+  line-height: 1;            /* Tight line spacing */
+  letter-spacing: -3px;      /* Condensed letter spacing */
+  background: linear-gradient(to bottom, #fff, #e6e6e6); /* Gradient text */
+  -webkit-background-clip: text; /* Clip background to text */
+  background-clip: text;     /* Standard property */
+  color: transparent;       /* Hide text color to show gradient */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle depth */
+  padding: 0 10px;          /* Prevent text clipping */
+}
+
+/* Secondary weather information styling */
+#weather-info {
+  font-size: 1.4rem;        /* Slightly larger than base */
+  margin-top: -5px;         /* Negative margin for tight spacing */
+}
+
+/* Weather icon with fade-in animation */
+#weather-icon {
+  width: 150px;            /* Fixed dimensions */
+  height: 150px;          
+  margin: 0 auto;          /* Horizontal centering */
+  display: none;           /* Initially hidden */
+  opacity: 0;              /* Start transparent */
+  transition: opacity 0.5s ease; /* Smooth fade-in */
+}
+
+#weather-icon.show {
+  display: block;          /* Show when active */
+  opacity: 1;              /* Fully visible */
+}
+
+/* ==================== STATUS INDICATORS ==================== */
+/* 
+ * Loading spinner animation
+ * Uses CSS animation for smooth rotation
+ */
+#loading-indicator {
+  display: none;           /* Initially hidden */
+  margin: 20px auto;      /* Centered with spacing */
+  border: 4px solid rgba(255, 255, 255, 0.3); /* Base circle */
+  border-radius: 50%;     /* Perfect circle */
+  border-top: 4px solid white; /* Spinner indicator */
+  width: 40px;           /* Fixed size */
+  height: 40px;         
+  animation: spin 1s linear infinite; /* Continuous rotation */
+}
+
+/* Spinner animation keyframes */
+@keyframes spin {
+  0% { transform: rotate(0deg); }  /* Starting position */
+  100% { transform: rotate(360deg); } /* Full rotation */
+}
+
+/* 
+ * Error message styling with attention-grabbing colors
+ * Designed to be noticeable without being overwhelming
+ */
+#error-message {
+  display: none;                     /* Initially hidden */
+  background: linear-gradient(to right, #ff6b6b, #ffae42); /* Warning gradient */
+  color: white;                     /* High contrast text */
+  padding: 12px;                    /* Comfortable spacing */
+  border-radius: 8px;               /* Rounded corners */
+  margin: 15px 0;                   /* Vertical spacing */
+  font-size: 15px;                  /* Readable text size */
+}
+
+/* ==================== HOURLY FORECAST ==================== */
+/* 
+ * Horizontal scrolling forecast with interactive items
+ * Uses flexbox for responsive layout
+ */
+#hourly-forecast {
+  display: flex;                  /* Horizontal layout */
+  overflow-x: auto;              /* Horizontal scrolling */
+  gap: 12px;                    /* Consistent spacing */
+  padding: 15px 5px;           /* Internal padding */
+  margin-top: 20px;           /* Spacing from elements above */
+  scrollbar-width: thin;     /* Slim scrollbar (Firefox) */
+  scrollbar-color: rgba(255,255,255,0.3) transparent; /* Custom scrollbar */
+}
+
+/* Individual forecast item styling */
+.hourly-item {
+  flex: 0 0 auto;             /* Prevent flex item resizing */
+  width: 80px;               /* Fixed width */
+  padding: 10px;             /* Internal spacing */
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+  border-radius: 10px;       /* Rounded corners */
+  text-align: center;       /* Center-aligned content */
+  transition: all 0.2s ease; /* Smooth hover transition */
+}
+
+/* Interactive hover state */
+.hourly-item:hover {
+  transform: scale(1.05);    /* Slight enlargement */
+  background: linear-gradient(to left, #005AA7, #FFFDE4); /* Gradient background */
+}
+
+/* Weather icon within forecast items */
+.hourly-item img {
+  width: 40px;              /* Fixed dimensions */
+  height: 40px;            
+  margin: 5px 0;           /* Vertical spacing */
+}
+
+/* Text elements within forecast items */
+.hourly-item span {
+  display: block;          /* Stack elements vertically */
+  font-size: 14px;        /* Appropriate text size */
+  margin: 3px 0;         /* Consistent spacing */
+}
+
+/* ==================== EXTRA WEATHER DATA ==================== */
+/* 
+ * Grid layout for additional weather metrics
+ * Two-column layout with proper alignment
+ */
+#extra-info {
+  display: grid;                   /* Grid layout */
+  grid-template-columns: 1fr 1fr;  /* Two equal columns */
+  gap: 15px;                      /* Consistent gutter */
+  margin-top: 1.5rem;            /* Spacing from elements above */
+  text-align: left;              /* Left-aligned text */
+}
+
+/* Humidity-specific hover effect */
+#extra-info p#humidity {
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+#extra-info p#humidity:hover {
+  background-color: #ffeb3b;  /* Highlight color */
+  color: #000;               /* Contrast text */
+  cursor: pointer;          /* Indicates interactivity */
+  border-radius: 5px;      /* Softened corners */
+  padding: 2px 5px;       /* Internal spacing */
+}
+
+/* Paragraph styling within extra info */
+#extra-info p {
+  font-size: 1.1rem;      /* Slightly larger text */
+  display: flex;         /* Flex layout for alignment */
+  align-items: center;  /* Vertical centering */
+  margin: 8px 0;       /* Consistent spacing */
+}
+
+/* Icon styling within extra info */
+#extra-info i {
+  font-size: 1.2rem;   /* Slightly larger than text */
+  margin-right: 10px; /* Spacing from text */
+  width: 24px;       /* Fixed width for alignment */
+  text-align: center; /* Horizontal centering */
+}
+
+/* ==================== RESPONSIVE ADJUSTMENTS ==================== */
+/* 
+ * Media queries for mobile device optimization
+ * Adjusts layout and typography for smaller screens
+ */
+@media (max-width: 480px) {
+  /* More compact container */
+  #weather-container {
+    padding: 20px;
+  }
+
+  /* Adjusted temperature size */
+  #temp-div p {
+    font-size: 4.5rem;
+  }
+
+  /* Smaller secondary text */
+  #weather-info {
+    font-size: 1.2rem;
+  }
+
+  /* Single column layout for metrics */
+  #extra-info {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  /* Smaller metric text */
+  #extra-info p {
+    font-size: 1rem;
+  }
+
+  /* More compact forecast items */
+  .hourly-item {
+    width: 70px;
+  }
+}
